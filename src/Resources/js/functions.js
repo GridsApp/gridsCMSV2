@@ -64,7 +64,7 @@ export default class Functions {
         };
     }
 
-    initSelect(maxVisibleSelections, dispatchInit, dispatchChanged) {
+    initSelect(maxVisibleSelections, dispatchInit, dispatchChanged, forceMultiple = false) {
         return {
             open: false,
             search: "",
@@ -80,9 +80,11 @@ export default class Functions {
 
             init() {
                 this.options = [];
-                this.multiple = Array.isArray(this.$wire.value);
+                this.multiple = forceMultiple || Array.isArray(this.$wire.value);
 
-                this.selectedValues = this.$wire.value;
+                this.selectedValues = this.multiple
+                    ? [...(this.$wire.value || [])].map(String)
+                    : (this.$wire.value ? String(this.$wire.value) : null);
                 this.selectedOptions = this.selectedOptions || [];
 
                

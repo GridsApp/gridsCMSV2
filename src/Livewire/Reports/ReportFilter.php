@@ -27,11 +27,10 @@ class ReportFilter extends Component
     
         $class = new $this->classPath;
 
-        $form = [];
-     
         foreach($class->filters as $filter){
-     
-            $form[$filter["name"]] = field_init($filter);
+            if (!isset($this->form[$filter["name"]])) {
+                $this->form[$filter["name"]] = field_init($filter, null);
+            }
         }
     }
 
