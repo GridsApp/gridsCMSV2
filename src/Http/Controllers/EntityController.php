@@ -67,6 +67,7 @@ class EntityController extends Controller
                         $attributes['table'] =  $column['options']['table'];
                         $attributes['foreign_key'] = $column['name'];
                         $attributes['column'] = $column['options']['field'];
+                        $attributes['multiple'] = $column['multiple'] ?? false;
                     }
 
                     $table = $table->addFilter($label, $name, $name, $filterType, $attributes);
